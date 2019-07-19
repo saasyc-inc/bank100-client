@@ -1,0 +1,19 @@
+{
+    "name": "unify-redis/unify-redis",
+    "description": "对 redis 进行简要封装",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "杨益民",
+            "email": "744541711@qq.com"
+        }
+    ],
+    "require": {
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "UnifyRedis\\": "src/"
+        }
+    }
+}
