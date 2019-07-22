@@ -155,7 +155,9 @@ class UnifyRedis
      */
     public static function zadd(string $key, int $score, $val)
     {
-        return Redis::command('zadd', [$key, $score, $val]);
+        return Redis::command(
+            'zadd', [$key, $score, $val]
+        );
     }
 
     /**

@@ -8,9 +8,10 @@
 
 namespace UnifyRedisTest;
 
+use PHPUnit\Framework\TestCase;
 use UnifyRedis\UnifyRedis;
 
-class UnifyRedisTest
+class UnifyRedisTest extends TestCase
 {
 
     /**
@@ -18,7 +19,6 @@ class UnifyRedisTest
      */
     public function correct_case()
     {
-
         $key = "test:prefix";
 
         $i = 0;
@@ -36,13 +36,6 @@ class UnifyRedisTest
             7,
         ]);
 
-//        $num = 3;
-//
-//        CustomRedis::zset_remove_highests($key, $num);
-//
-        dd(
-            UnifyRedis::zrange($key, 3, 100)
-        );
-
+       
     }
 }
