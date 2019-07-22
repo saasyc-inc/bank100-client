@@ -9,11 +9,14 @@
         }
     ],
     "require": {
-        "ext-json": "*"
+        "ext-json": "*",
+        "php": ">=7.2.0",
+        "phpunit/phpunit": "^8.2"
     },
     "autoload": {
         "psr-4": {
-            "UnifyRedis\\": "src/"
+            "UnifyRedis\\": "src/",
+            "UnifyRedisTest\\": "test/"
         }
     }
 }
