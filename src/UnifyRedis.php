@@ -1,7 +1,6 @@
 <?php
 
-//use App\Modules\Exceptions\ParamsNeedGreaterThanZeroException;
-//use Illuminate\Support\Facades\Redis;
+//todo add exceptions package
 
 namespace UnifyRedis;
 
@@ -249,6 +248,5 @@ class UnifyRedis
     {
         return Redis::command('expire', [$key, 0]);
     }
-
 
 }

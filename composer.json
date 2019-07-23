@@ -16,8 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "UnifyRedis\\": "src/",
-            "UnifyRedisTest\\": "test/"
+            "UnifyRedis\\": "src/"
         }
     },
     "require-dev": {
