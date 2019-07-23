@@ -4,7 +4,7 @@
 //use Illuminate\Support\Facades\Redis;
 
 namespace UnifyRedis;
-use UnifyRedis\RedisFacade as Redis;
+use Illuminate\Support\Facades\Redis as Redis;
 
 class UnifyRedis
 {

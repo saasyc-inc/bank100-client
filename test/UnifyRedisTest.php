@@ -8,6 +8,8 @@
 
 namespace UnifyRedisTest;
 
+use Illuminate\Database\Capsule\Manager;
+use Illuminate\Support\Facades\Redis;
 use PHPUnit\Framework\TestCase;
 use UnifyRedis\UnifyRedis;
 
@@ -19,6 +21,8 @@ class UnifyRedisTest extends TestCase
      */
     public function correct_case()
     {
+        Redis::command('zadd',['age',0,1]);
+
         $key = "test:prefix";
 
         $i = 0;

@@ -2,6 +2,9 @@
     "name": "unify-redis/unify-redis",
     "description": "对 redis 进行简要封装",
     "license": "MIT",
+    "keywords": [
+        "laravel"
+    ],
     "authors": [
         {
             "name": "杨益民",
@@ -10,7 +13,6 @@
     ],
     "require": {
         "ext-json": "*",
-        "php": ">=7.2.0",
         "phpunit/phpunit": "^8.2"
     },
     "autoload": {
@@ -18,5 +20,7 @@
             "UnifyRedis\\": "src/",
             "UnifyRedisTest\\": "test/"
         }
+    },
+    "require-dev": {
     }
 }
