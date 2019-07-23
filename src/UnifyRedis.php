@@ -4,6 +4,7 @@
 //use Illuminate\Support\Facades\Redis;
 
 namespace UnifyRedis;
+
 use Illuminate\Support\Facades\Redis as Redis;
 
 class UnifyRedis
@@ -41,11 +42,10 @@ class UnifyRedis
     }
 
 
-    public static function isDelimiter($key, $val):bool
+    public static function isDelimiter($key, $val) : bool
     {
         return self::getSignByKey($key) === $val;
     }
-
 
 
     public static function command($key, $params)
@@ -186,7 +186,7 @@ class UnifyRedis
      * @return array
      * @throws ParamsNeedGreaterThanZeroException
      */
-    public static function zset_remove_highests($key, $num ) : array
+    public static function zset_remove_highests($key, $num) : array
     {
         if ($num < 1) {
             throw new ParamsNeedGreaterThanZeroException($num);
@@ -243,6 +243,11 @@ class UnifyRedis
         $info = self::zrevrange($key, 0, 0);
 
         return $info[ 0 ] ?? null;
+    }
+
+    public static function expire_key($key)
+    {
+        return Redis::command('expire', $key, 0);
     }
 
 
