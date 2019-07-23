@@ -247,7 +247,7 @@ class UnifyRedis
 
     public static function expire_key($key)
     {
-        return Redis::command('expire', $key, 0);
+        return Redis::command('expire', [$key, 0]);
     }
 
 
