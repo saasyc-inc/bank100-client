@@ -14,6 +14,7 @@ class UnifyRedis
      * 如果队列为空 插入一个标志
      * @param $key
      * @param $val
+     * @throws \RedisException
      */
     public static function push_get_a_ring(
         $key,
@@ -47,6 +48,12 @@ class UnifyRedis
     }
 
 
+    /**
+     * @param $key
+     * @param $params
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function command($key, $params)
     {
         return Redis::command($key, $params);
@@ -64,6 +71,7 @@ class UnifyRedis
      * 返回数组方便析构 对象校验数据格式比较困难
      * @param $key
      * @return array|string|null
+     * @throws \RedisException
      */
     public static function get($key)
     {
@@ -75,6 +83,7 @@ class UnifyRedis
      * @param $key
      * @param $val
      * @return mixed
+     * @throws \RedisException
      */
     public static function sadd($key, $val)
     {
@@ -85,6 +94,7 @@ class UnifyRedis
      * set_members
      * @param $key
      * @return mixed
+     * @throws \RedisException
      */
     public static function smembers($key)
     {
@@ -92,16 +102,33 @@ class UnifyRedis
     }
 
 
+    /**
+     * @param $key
+     * @param $expire_time
+     * @param $info
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function setEx($key, $expire_time, $info)
     {
         return Redis::command('setex', [$key, $expire_time, json_encode($info)]);
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function spop($key)
     {
         return Redis::command('spop', [$key,]);
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function set_num($key)
     {
         return Redis::command('scard', [$key,]);
@@ -136,11 +163,22 @@ class UnifyRedis
         return $res;
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function incr($key)
     {
         return Redis::command('incr', [$key,]);
     }
 
+    /**
+     * @param $key
+     * @param $num
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function incrby($key, $num)
     {
         return Redis::command('incrby', [$key, $num]);
@@ -152,6 +190,7 @@ class UnifyRedis
      * @param int $score
      * @param $val
      * @return mixed
+     * @throws \RedisException
      */
     public static function zadd(string $key, int $score, $val)
     {
@@ -163,12 +202,18 @@ class UnifyRedis
     /**
      * @param string $key
      * @return int
+     * @throws \RedisException
      */
     public static function zcard(string $key) : int
     {
         return Redis::command('zcard', [$key,]);
     }
 
+    /**
+     * @param $key
+     * @return mixed|null
+     * @throws \RedisException
+     */
     public static function zset_remove_latest($key)
     {
         $latest = self::z_set_highest_by_score($key);
@@ -185,6 +230,7 @@ class UnifyRedis
      * @param $num
      * @return array
      * @throws ParamsNeedGreaterThanZeroException
+     * @throws \RedisException
      */
     public static function zset_remove_highests($key, $num) : array
     {
@@ -214,30 +260,64 @@ class UnifyRedis
     }
 
 
-    //这里返回的是　数据从小到大(按照分数排序)
+
+    /**
+     * 这里返回的是　数据从小到大(按照分数排序)
+     * @param $key
+     * @param $min
+     * @param $max
+     * @return array
+     * @throws \RedisException
+     */
     public static function zrange($key, $min, $max) : array
     {
         return Redis::command('zrange', [$key, $min, $max]);
     }
 
-    //这里返回的是　数据从大到小(按照分数排序) 从 0 开始
+    /**
+     *这里返回的是　数据从大到小(按照分数排序) 从 0 开始
+     * @param $key
+     * @param $start
+     * @param $stop
+     * @return array
+     * @throws \RedisException
+     */
     public static function zrevrange($key, $start, $stop) : array
     {
         return Redis::command('zrevrange', [$key, $start, $stop]);
     }
 
-    //这里返回的是　值(分数)在某个区间的　比如　start 是　1  stop 是10 则　返回的是　分数在1-10之间的数据
+
+    /**
+     * 这里返回的是　值(分数)在某个区间的　比如　start 是　1  stop 是10 则　返回的是　分数在1-10之间的数据
+     * @param $key
+     * @param $start
+     * @param $stop
+     * @return array
+     * @throws \RedisException
+     */
     public static function zrangebyscore($key, $start, $stop) : array
     {
         return Redis::command('zrangebyscore', [$key, $start, $stop]);
     }
 
 
+    /**
+     * @param $key
+     * @param $num
+     * @return array
+     * @throws \RedisException
+     */
     public static function z_set_highests_by_score($key, $num) : array
     {
         return self::zrevrange($key, 0, $num - 1);
     }
 
+    /**
+     * @param $key
+     * @return mixed|null
+     * @throws \RedisException
+     */
     public static function z_set_highest_by_score($key)
     {
         $info = self::zrevrange($key, 0, 0);
@@ -245,6 +325,11 @@ class UnifyRedis
         return $info[ 0 ] ?? null;
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \RedisException
+     */
     public static function expire_key($key)
     {
         return Redis::command('expire', [$key, 0]);
