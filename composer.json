@@ -1,5 +1,5 @@
 {
-    "name": "unify-redis/unify-redis",
+    "name": "yiche/unify-redis",
     "description": "对 redis 进行简要封装",
     "license": "MIT",
     "keywords": [

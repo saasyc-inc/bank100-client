@@ -5,10 +5,10 @@
 namespace UnifyRedis;
 
 use Illuminate\Support\Facades\Redis as Redis;
+use UnifyRedis\Execeptions\ParamsNeedGreaterThanZeroException;
 
 class UnifyRedis
 {
-
     /**
      * 想队列里插入一条数据
      * 如果队列为空 插入一个标志
@@ -35,7 +35,7 @@ class UnifyRedis
     public static function getSignByKey($key)
     {
         $app_key =
-            Settings::get('应用随机数');
+            md5('应用随机数');
 
         return md5($key . $app_key);
     }
@@ -113,6 +113,7 @@ class UnifyRedis
      * @param $key
      * @param $num
      * @return array
+     * @throws ParamsNeedGreaterThanZeroException
      */
     public static function spop_ids($key, $num) : array
     {
