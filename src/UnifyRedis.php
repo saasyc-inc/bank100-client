@@ -9,6 +9,11 @@ use UnifyRedis\Execeptions\ParamsNeedGreaterThanZeroException;
 
 class UnifyRedis
 {
+    const random_time_upper_limit_percent = 1.1;
+
+    const random_time_lower_limit_percent = 0.9;
+
+
     /**
      * 想队列里插入一条数据
      * 如果队列为空 插入一个标志
@@ -111,6 +116,31 @@ class UnifyRedis
      */
     public static function setEx($key, $expire_time, $info)
     {
+        return Redis::command('setex', [$key, $expire_time, json_encode($info)]);
+    }
+
+
+    /**
+     * @param $key
+     * @param $expire_time
+     * @param $info
+     * @return mixed
+     * @throws \RedisException
+     */
+    public static function setExRandom($key, $expire_time, $info)
+    {
+        $lower_limit = self::random_time_lower_limit_percent;
+
+        $upper_limit = self::random_time_upper_limit_percent;
+
+        $begin = floor($lower_limit * $expire_time);
+
+        $end = ceil($upper_limit * $expire_time);
+
+        $expire_time = random_int(
+            $begin, $end
+        );
+
         return Redis::command('setex', [$key, $expire_time, json_encode($info)]);
     }
 
@@ -258,7 +288,6 @@ class UnifyRedis
 
         return $res;
     }
-
 
 
     /**
