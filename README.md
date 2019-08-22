@@ -1,7 +1,12 @@
+### 说明　通过百融 获取手机三要素的包
+
 ###  配置
+```
+
 　 'yiche.server.access.token';  yiche-server 鉴权的token
    'yiche.server.domain';   yiche-server 的域名
 
+```
 ####  调用
 
 

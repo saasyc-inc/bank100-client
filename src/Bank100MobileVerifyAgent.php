@@ -51,7 +51,7 @@ class Bank100MobileVerifyAgent
      * @return array
      * @throws ServerResponseErrorException
      */
-    public static function parser($info, $params) : array
+    private static function parser($info, $params) : array
     {
         [
             'name'    => $name,
