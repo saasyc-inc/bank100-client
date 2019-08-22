@@ -1,5 +1,5 @@
 {
-    "name": "yiche/bank100",
+    "name": "yiche/bank100-client",
     "description": "对 redis 进行简要封装",
     "license": "MIT",
     "keywords": [
