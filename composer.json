@@ -1,5 +1,5 @@
 {
-    "name": "missing-u/unify-redis",
+    "name": "yiche/bank100",
     "description": "对 redis 进行简要封装",
     "license": "MIT",
     "keywords": [
@@ -12,13 +12,13 @@
         }
     ],
     "require": {
-        "ext-json": "*"
+        "ext-json": "*",
+        "yiche/simple-request": "^4.0",
+        "yiche/config": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "UnifyRedis\\": "src/"
+            "Bank100Client\\": "src/"
         }
-    },
-    "require-dev": {
     }
 }
